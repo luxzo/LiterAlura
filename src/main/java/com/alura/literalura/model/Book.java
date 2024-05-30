@@ -3,6 +3,7 @@ package com.alura.literalura.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "books")
@@ -14,32 +15,23 @@ public class Book {
     @Column(unique = true)
     private String title;
 
+    @ManyToOne
+    private Author author;
+
     private Long downloadCount;
-    @ManyToMany
-    @JoinTable(
-            name = "author_books",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id"))
-    List<Author> authorOfBook;
 
-    @ManyToMany
-    @JoinTable(
-            name = "language_books",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "language_id"))
-    List<Language> languageOfBook;
+    private List<String> language;
 
-    public Book(BookData bookData) {
+   /* public Book(BookData bookData) {
         this.title = bookData.title();
         this.downloadCount = bookData.downloadCount();
-    }
+        this.language = bookData.language();
+    }*/
 
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
+    public Book(String title, Long downloadCount, List<String> language) {
+        this.title = title;
+        this.downloadCount = downloadCount;
+        this.language = language;
     }
 
     public String getTitle() {
@@ -50,6 +42,14 @@ public class Book {
         this.title = title;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     public Long getDownloadCount() {
         return downloadCount;
     }
@@ -58,29 +58,20 @@ public class Book {
         this.downloadCount = downloadCount;
     }
 
-    public List<Author> getAuthorOfBook() {
-        return authorOfBook;
+    public List<String> getLanguage() {
+        return language;
     }
 
-    public void setAuthorOfBook(List<Author> authorOfBook) {
-        this.authorOfBook = authorOfBook;
-    }
-
-    public List<Language> getLanguageOfBook() {
-        return languageOfBook;
-    }
-
-    public void setLanguageOfBook(List<Language> languageOfBook) {
-        this.languageOfBook = languageOfBook;
+    public void setLanguage(List<String> language) {
+        this.language = language;
     }
 
     @Override
     public String toString() {
-        return "Book: {" +
-                "title= " + title +
-                ", downloadCount= " + downloadCount +
-                ", authorOfBook= " + authorOfBook +
-                ", languageOfBook= " + languageOfBook +
+        return "Libro {" +
+                "Título = '" + title + '\'' +
+                ", Número de descargas =" + downloadCount +
+                ", Idioma = '" + language + '\'' +
                 '}';
     }
 }

@@ -18,8 +18,8 @@ public class Author {
 
     private Integer yearOfDeath;
 
-    @ManyToMany(mappedBy = "authorOfBook")
-    List<Book> booksOfAuthor;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Book> books;
 
     public Author(AuthorData authorData) {
         this.name = authorData.name();
@@ -67,21 +67,22 @@ public class Author {
         this.yearOfDeath = yearOfDeath;
     }
 
-    public List<Book> getBooksOfAuthor() {
-        return booksOfAuthor;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setBooksOfAuthor(List<Book> booksOfAuthor) {
-        this.booksOfAuthor = booksOfAuthor;
+    public void setBooks(List<Book> books) {
+        books.forEach(b -> b.setAuthor(this));
+        this.books = books;
     }
 
     @Override
     public String toString() {
-        return "Author: {" +
-                "name= " + name +
-                ", yearOfBirth= " + yearOfBirth +
-                ", yearOfDeath= " + yearOfDeath +
-                ", booksOfAuthor= " + booksOfAuthor +
+        return "Autor {" +
+                "Nombre = '" + name + '\'' +
+                ", Año de nacimiento =" + yearOfBirth +
+                ", Año de fallecimiento =" + yearOfDeath +
+                ", Libros = " + books +
                 '}';
     }
 }

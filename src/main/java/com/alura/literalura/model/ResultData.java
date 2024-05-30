@@ -3,7 +3,9 @@ package com.alura.literalura.model;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Collections;
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record LanguageData(
-        @JsonAlias("languages") String langAbrv) {
+public record ResultData (@JsonAlias("results") List<BookData> books) {
 }
