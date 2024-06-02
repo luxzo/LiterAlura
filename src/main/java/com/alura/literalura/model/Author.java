@@ -73,6 +73,7 @@ public class Author {
 
     public void setBooks(List<Book> books) {
         books.forEach(b -> b.setAuthor(this));
+//        books.forEach(b -> b.setAuthor(this.books.stream().map(c -> c.)));
         this.books = books;
     }
 
