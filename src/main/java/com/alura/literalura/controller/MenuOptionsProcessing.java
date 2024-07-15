@@ -34,7 +34,7 @@ public class MenuOptionsProcessing {
             BookData bookData = getBookData();
             Book book = new Book(bookData);
 //            Book book = new Book(bookData.title(), bookData.downloadCount(),
-                    bookData.language().get(0));
+//                    bookData.language().get(0));
 //            book.setAuthor(bookData.author().get(0).toString());
             System.out.println(book);
 //            repository.save(book);

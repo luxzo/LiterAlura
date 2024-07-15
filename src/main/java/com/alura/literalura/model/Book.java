@@ -34,7 +34,7 @@ public class Book {
 
     public Book(BookData bookData) {
         this.title = bookData.title();
-        this.author = bookData.author().stream().map(a -> a.name().toString()).;
+        //this.author = bookData.author().stream().map(a -> a.name().toString());
         this.downloadCount = bookData.downloadCount();
         this.language = bookData.language().get(0);
     }
